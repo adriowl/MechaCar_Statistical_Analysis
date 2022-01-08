@@ -22,3 +22,18 @@ total_summary
 #Create summary data frame for column: PSI
 lot_summary <- SusCoil %>% group_by(Manufacturing_Lot) %>% summarize(Mean=mean(PSI), Median=median(PSI), Variance=var(PSI), SD=sd(PSI), .groups = 'keep')
 lot_summary
+
+#Challenge 3
+# Null: There is no statistical difference between the observed mean and its presumed population mean of 1500
+# Alternative: There is no statistical difference between the observed mean and its presumed population mean of 1500
+#First: t-test for PSI of entire population
+t.test(SusCoil$PSI, mu=1500)
+#high p value means we fail to reject the null. Thus there is no statistical difference between the pop and sample means
+
+# Null: There is no statistical difference between the observed mean and its presumed population mean of 1500
+# Alternative: There is no statistical difference between the observed mean and its presumed population mean of 1500
+# Observed mean: PSI split up by Lot
+t.test(SusCoil$PSI, mu=1500,subset=Manufacturing_Lot=='Lot1')
+t.test(SusCoil$PSI, mu=1500,subset=Manufacturing_Lot=='Lot2')
+t.test(SusCoil$PSI, mu=1500,subset=Manufacturing_Lot=='Lot3')
+#Fail to reject the null on all of these, meaning there is no statistical difference between PSI mean by lot and the population mean of 1500
