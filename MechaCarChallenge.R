@@ -12,3 +12,13 @@ summary(model)
 install.packages("car")
 library(car)
 avPlots(model)
+
+#Move on to challenge number 2. Import Suspension_Coil.csv
+SusCoil <- read.csv(file='Suspension_Coil.csv',check.names=F,stringsAsFactors = F)
+SusCoil 
+#Create summary data frame for column: PSI
+total_summary <- SusCoil %>% group_by(mean(PSI)) %>% summarize(Mean=mean(SusCoil$PSI), Median=median(SusCoil$PSI), Variance=var(SusCoil$PSI), SD=sd(SusCoil$PSI), .groups = 'keep')
+total_summary
+#Create summary data frame for column: PSI
+lot_summary <- SusCoil %>% group_by(Manufacturing_Lot) %>% summarize(Mean=mean(PSI), Median=median(PSI), Variance=var(PSI), SD=sd(PSI), .groups = 'keep')
+lot_summary
